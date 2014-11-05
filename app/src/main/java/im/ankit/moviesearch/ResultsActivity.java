@@ -5,8 +5,15 @@ import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
-public class ResultsActivity extends FragmentActivity {
+import im.ankit.moviesearch.models.Movie;
+import im.ankit.moviesearch.models.Movies;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+public class ResultsActivity extends FragmentActivity{
     ViewPager Tab;
     TabPagerAdapter TabAdapter;
     ActionBar actionBar;
@@ -45,5 +52,26 @@ public class ResultsActivity extends FragmentActivity {
         //Add New Tab
         actionBar.addTab(actionBar.newTab().setText("Details").setTabListener(tabListener));
         actionBar.addTab(actionBar.newTab().setText("Actors").setTabListener(tabListener));
+
+
+        RestClient client = new RestClient();
+
+        Callback callback = new Callback() {
+            @Override
+            public void success(Object o, Response response) {
+                 Movies m = (Movies)o;
+                 Movie movie = m.movies.get(0);
+
+                 Log.d("PIKA",movie.cast.get(0).name + " " + movie.posters.thumbnail + " " + movie.title + " ok");
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+
+            }
+        };
+
+        client.getApiService().getMovieContent("iron man",callback);
     }
+
 }
