@@ -1,9 +1,12 @@
 package im.ankit.moviesearch;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 
 public class SearchActivity extends Activity {
@@ -20,6 +23,15 @@ public class SearchActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.search, menu);
         return true;
+    }
+
+    public void searchBtnClicked(View view)
+    {
+        Intent intent = new Intent(this, ResultsActivity.class);
+        EditText editText = (EditText) findViewById(R.id.searchEditText);
+        String message = editText.getText().toString();
+        intent.putExtra("searchText", message);
+        startActivity(intent);
     }
 
     @Override
