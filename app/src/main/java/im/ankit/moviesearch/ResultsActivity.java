@@ -62,12 +62,12 @@ public class ResultsActivity extends FragmentActivity{
                  Movies m = (Movies)o;
                  Movie movie = m.movies.get(0);
 
-                 Log.d("PIKA",movie.cast.get(0).name + " " + movie.posters.thumbnail + " " + movie.title + " ok");
+                 Log.d("PIKA", movie.cast.get(0).name + " " + movie.posters.thumbnail + " " + movie.title + " ok");
             }
 
             @Override
             public void failure(RetrofitError retrofitError) {
-
+                Log.d("PIKA","fail" + retrofitError.getMessage());
             }
         };
 

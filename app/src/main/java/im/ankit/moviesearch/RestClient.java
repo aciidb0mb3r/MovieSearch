@@ -7,7 +7,7 @@ import retrofit.converter.GsonConverter;
 
 public class RestClient
 {
-    private static final String BASE_URL = "http://api.rottentomatoes.com";
+    private static final String BASE_URL = "http://local";
     private ApiService apiService;
 
     public RestClient()
@@ -20,6 +20,7 @@ public class RestClient
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(BASE_URL)
                 .setConverter(new GsonConverter(gson))
+                .setClient(new MockClient())
                 .build();
 
         apiService = restAdapter.create(ApiService.class);
